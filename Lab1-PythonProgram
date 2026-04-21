@@ -1,0 +1,83 @@
+# ================================
+# LAB 1: DATA IMPORT & EXPORT USING PANDAS
+# ================================
+
+# Step 1: Import Libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+
+# ================================
+# Step 2: Load Dataset (Import)
+# ================================
+iris = load_iris()
+
+# Convert to Pandas DataFrame
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+df['species'] = iris.target
+
+print("First 5 rows of dataset:")
+print(df.head())
+
+# ================================
+# Step 3: Understand Data
+# ================================
+print("\nShape of dataset:", df.shape)
+print("\nColumns:", df.columns)
+print("\nInfo:")
+print(df.info())
+
+# ================================
+# Step 4: Statistical Summary
+# ================================
+print("\nStatistical Summary:")
+print(df.describe())
+
+# ================================
+# Step 5: Count Each Category
+# ================================
+print("\nSpecies Count:")
+print(df['species'].value_counts())
+
+# ================================
+# Step 6: Visualization
+# ================================
+plt.scatter(df['sepal length (cm)'], df['petal length (cm)'])
+plt.xlabel("Sepal Length")
+plt.ylabel("Petal Length")
+plt.title("Sepal vs Petal Length")
+plt.show()
+
+# ================================
+# Step 7: Filter Data
+# ================================
+print("\nSpecies 0 Sample:")
+print(df[df['species'] == 0].head())
+
+print("\nSpecies 1 Sample:")
+print(df[df['species'] == 1].head())
+
+# ================================
+# Step 8: Correlation
+# ================================
+print("\nCorrelation Matrix:")
+print(df.corr())
+
+# ================================
+# Step 9: Sort Data
+# ================================
+sorted_df = df.sort_values(by='petal length (cm)')
+print("\nSorted Data:")
+print(sorted_df.head())
+
+# ================================
+# Step 10: Export Data
+# ================================
+
+# Export full dataset
+df.to_csv("iris_dataset.csv", index=False)
+
+# Export processed/sorted dataset
+sorted_df.to_csv("sorted_iris_dataset.csv", index=False)
+
+print("\nData successfully exported to CSV files.")
