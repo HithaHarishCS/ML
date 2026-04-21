@@ -1,0 +1,24 @@
+import pandas as pd
+import numpy as np
+
+data = pd.DataFrame({
+    'Name': ['Asha', 'Ravi', 'Meena', 'Kiran', 'Ravi'],
+    'Age': [20, 21, np.nan, 22, 21],
+    'Marks': [85, 78, 92, np.nan, 78],
+    'City': ['Bangalore', 'Mysore', 'Bangalore', 'Chennai', 'Mysore']
+})
+
+print("Original Data:")
+print(data)
+
+data = data.drop_duplicates()
+
+data['Age'] = data['Age'].fillna(data['Age'].mean())
+data['Marks'] = data['Marks'].fillna(data['Marks'].mean())
+
+data['Age'] = (data['Age'] - data['Age'].min()) / (data['Age'].max() - data['Age'].min())
+
+data = pd.get_dummies(data, columns=['City'])
+
+print("\nProcessed Data:")
+print(data)

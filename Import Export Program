@@ -1,0 +1,10 @@
+import pandas as pd
+
+data = pd.read_csv('input.csv')
+print(data)
+
+print(data.head())
+
+data.to_csv('output.csv', index=False)
+
+print("Data successfully exported to 'output.csv'")
